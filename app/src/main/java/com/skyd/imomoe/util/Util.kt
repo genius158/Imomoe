@@ -98,18 +98,18 @@ object Util {
      * 获取用户须知String
      */
     fun getUserNoticeContent(): String {
-        val sb = StringBuffer()
-        try {
-            val inputStream = App.context.resources.openRawResource(R.raw.notice)
-            val reader = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
-            var out: String?
-            while (reader.readLine().also { out = it } != null) {
-                sb.append(out)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return sb.toString()
+//        val sb = StringBuffer()
+//        try {
+//            val inputStream = App.context.resources.openRawResource(R.raw.notice)
+//            val reader = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
+//            var out: String?
+//            while (reader.readLine().also { out = it } != null) {
+//                sb.append(out)
+//            }
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
+        return "debug app"
     }
 
     fun getWebsiteLinkSuffix(): String {

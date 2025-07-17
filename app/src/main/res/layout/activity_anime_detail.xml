@@ -10,8 +10,7 @@
         android:id="@+id/iv_anime_detail_activity_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/ic_launcher_background" />
+        android:src="#321D57"/>
 
     <View
         android:layout_width="match_parent"

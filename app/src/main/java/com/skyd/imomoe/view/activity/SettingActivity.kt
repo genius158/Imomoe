@@ -83,7 +83,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
                 icon(R.drawable.ic_sd_storage_main_color_2_24_skin)
                 title(res = R.string.warning)
                 message(text = "确定清理所有缓存？不包括缓存视频")
-                positiveButton(res = R.string.clean) { viewModel.clearAllCache() }
+                positiveButton(res = R.string.clean) { viewModel.clearAllCache(application) }
                 negativeButton(res = R.string.cancel) { dismiss() }
             }
         }

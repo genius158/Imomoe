@@ -17,7 +17,6 @@ import com.skyd.imomoe.util.Util.getSkinResourceId
 import com.skyd.imomoe.util.Util.getStatusBarHeight
 import com.skyd.imomoe.util.Util.setTransparentStatusBar
 import com.skyd.imomoe.util.Util.showToast
-import com.skyd.imomoe.util.coil.DarkBlurTransformation
 import com.skyd.imomoe.util.coil.CoilUtil.loadImage
 import com.skyd.imomoe.util.smartNotifyDataSetChanged
 import com.skyd.imomoe.util.visible
@@ -29,8 +28,6 @@ import com.skyd.imomoe.viewmodel.AnimeDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.URL
-import kotlin.random.Random
 
 
 class AnimeDetailActivity : BaseActivity<ActivityAnimeDetailBinding>() {
@@ -126,18 +123,7 @@ class AnimeDetailActivity : BaseActivity<ActivityAnimeDetailBinding>() {
             mBinding.llAnimeDetailActivityToolbar.ivToolbar1Button2.isEnabled = true
 
             if (viewModel.cover.url.isBlank()) return@Observer
-            mBinding.ivAnimeDetailActivityBackground.loadImage(viewModel.cover.url) {
-                transformations(DarkBlurTransformation(this@AnimeDetailActivity))
-                addHeader("Referer", viewModel.cover.referer)
-                addHeader("Host", URL(viewModel.cover.url).host)
-                addHeader("Accept", "*/*")
-                addHeader("Accept-Encoding", "gzip, deflate")
-                addHeader("Connection", "keep-alive")
-                addHeader(
-                    "User-Agent",
-                    Const.Request.USER_AGENT_ARRAY[Random.nextInt(Const.Request.USER_AGENT_ARRAY.size)]
-                )
-            }
+            mBinding.ivAnimeDetailActivityBackground.loadImage(viewModel.cover.url, true)
             mBinding.llAnimeDetailActivityToolbar.tvToolbar1Title.text = viewModel.title
         })
 

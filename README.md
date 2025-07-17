@@ -1,3 +1,9 @@
+## version 2.0.0
+1. 去除友盟
+2. 图片库使用glide
+3. 编译适配gradle:7.3.1
+4. 使用arm64-v8a位架构
+---
 ![readme_cover](image/readme_cover.png)
 
 <div align="center">

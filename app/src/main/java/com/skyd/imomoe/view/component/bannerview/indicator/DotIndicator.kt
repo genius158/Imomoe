@@ -73,7 +73,7 @@ class DotIndicator : View, Indicator {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         if (mDotsCount > 1) {
