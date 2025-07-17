@@ -59,12 +59,9 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>() {
             setBuiltInZoomControls(true)
             setUseWideViewPort(true)
             setSupportMultipleWindows(false)
-            setAppCacheEnabled(true)
             setDomStorageEnabled(true)
             setJavaScriptEnabled(true)
             setGeolocationEnabled(true)
-            setAppCacheMaxSize(Long.MAX_VALUE)
-            setAppCachePath(getDir("appcache", 0).path)
             setDatabasePath(getDir("databases", 0).path)
             setGeolocationDatabasePath(
                 getDir("geolocation", 0)

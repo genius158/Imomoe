@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'AndResGuard'
-    id 'com.efs.sdk.plugin'
 }
 
 apply from: secret
@@ -42,7 +41,7 @@ android {
         }
 
         ndk {
-            abiFilters 'armeabi'
+            abiFilters 'arm64-v8a'
         }
 
         manifestPlaceholders = secret.manifestPlaceholders
@@ -67,7 +66,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "app_release_${variant.productFlavors[0].name.toLowerCase()}_${variant.versionName}.apk"
+            outputFileName = "Imomoe${version_name}.apk"
         }
     }
 
@@ -78,9 +77,9 @@ android {
             shrinkResources false           // 使用keep.xml，keep住皮肤文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             applicationIdSuffix '.debug'    // 一台手机debug release共存
-            ndk {
-                abiFilters 'armeabi', 'x86', 'x86_64'
-            }
+//            ndk {
+//                abiFilters 'armeabi', 'x86', 'x86_64'
+//            }
         }
         release {
             signingConfig signingConfigs.release    //签名
@@ -88,9 +87,9 @@ android {
             zipAlignEnabled true
             shrinkResources true       // 使用keep.xml，keep住皮肤文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            ndk {
-                abiFilters 'armeabi'
-            }
+//            ndk {
+//                abiFilters 'armeabi'
+//            }
         }
     }
     compileOptions {
@@ -133,6 +132,7 @@ dependencies {
     implementation deps.support.material
     implementation deps.support.swiperefreshlayout
     implementation deps.support.constraintlayout
+    implementation deps.glide.glide
     implementation deps.jsoup.jsoup
     implementation deps.lifecycle.lifecycle_livedata_ktx
     implementation deps.lifecycle.lifecycle_viewmodel_ktx
@@ -152,67 +152,67 @@ dependencies {
     implementation deps.filedownloader.library
     implementation deps.cling.cling_core
     implementation deps.cling.cling_support
-    implementation deps.jetty.jetty_server
-    implementation deps.jetty.jetty_servlet
-    implementation deps.jetty.jetty_client
+//    implementation deps.jetty.jetty_server
+//    implementation deps.jetty.jetty_servlet
+//    implementation deps.jetty.jetty_client
     implementation deps.nanohttpd.nanohttpd
     compileOnly files ('libs/cdi-api.jar')      // DLNACastService编译需要javax.enterprise.inject.Alternative类
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
     implementation deps.greenrobot.eventbus
-    implementation deps.umsdk.common
-    implementation deps.umsdk.asms
-    implementation deps.umsdk.apm
-    implementation deps.umsdk.push
+//    implementation deps.umsdk.common
+//    implementation deps.umsdk.asms
+//    implementation deps.umsdk.apm
+//    implementation deps.umsdk.push
     implementation deps.smart.refresh_layout_kernel
     implementation deps.smart.refresh_header_material
     implementation deps.smart.refresh_footer_ball
     implementation deps.ctiao.DanmakuFlameMaster
-    implementation deps.coil_kt.coil
+//    implementation deps.coil_kt.coil
     implementation project(':skin')
     implementation project(':skin_blue')
     implementation project(':skin_dark')
     implementation project(':skin_lemon')
     implementation project(':skin_sweat_soybean')
 }
-
-// UM U-APM性能报告
-efs {
-    //是否对启动过程进程插桩的开关，如果使用自动集成监控则必须开启
-    isAutoTrack = true
-    //您自定义Application的类名称，必填项，如没有自定义则填写系统Application
-    applicationName = "App"
-    //您自定义Activity的类名称，必填项，将您所有Activity的类名按如下格式填写
-    activityList = [
-            "AboutActivity",
-            "AnimeDetailActivity",
-            "AnimeDownloadActivity",
-            "ClassifyActivity",
-            "CrashActivity",
-            "DlnaActivity",
-            "DlnaControlActivity",
-            "FavoriteActivity",
-            "HistoryActivity",
-            "LicenseActivity",
-            "MainActivity",
-            "MonthAnimeActivity",
-            "PlayActivity",
-            "RankActivity",
-            "SearchActivity",
-            "SettingActivity",
-            "SimplePlayActivity",
-            "DetailPlayerActivity",
-            "WebViewActivity",
-            "SkinActivity",
-            "NoticeActivity"
-    ]
-}
+//
+//// UM U-APM性能报告
+//efs {
+//    //是否对启动过程进程插桩的开关，如果使用自动集成监控则必须开启
+//    isAutoTrack = true
+//    //您自定义Application的类名称，必填项，如没有自定义则填写系统Application
+//    applicationName = "App"
+//    //您自定义Activity的类名称，必填项，将您所有Activity的类名按如下格式填写
+//    activityList = [
+//            "AboutActivity",
+//            "AnimeDetailActivity",
+//            "AnimeDownloadActivity",
+//            "ClassifyActivity",
+//            "CrashActivity",
+//            "DlnaActivity",
+//            "DlnaControlActivity",
+//            "FavoriteActivity",
+//            "HistoryActivity",
+//            "LicenseActivity",
+//            "MainActivity",
+//            "MonthAnimeActivity",
+//            "PlayActivity",
+//            "RankActivity",
+//            "SearchActivity",
+//            "SettingActivity",
+//            "SimplePlayActivity",
+//            "DetailPlayerActivity",
+//            "WebViewActivity",
+//            "SkinActivity",
+//            "NoticeActivity"
+//    ]
+//}
 
 //AndResGuard资源混淆工具
 andResGuard {
     // 使用mappingFile，防止需要换肤的资源id被替换
     mappingFile = file("./resource_mapping.txt")
 //    mappingFile = null
-    use7zip = true
+    use7zip = false
     useSign = true
     // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
     keepRoot = false
@@ -229,7 +229,7 @@ andResGuard {
             "resources.arsc"
     ]
     sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.20'
+//        artifact = 'com.tencent.mm:SevenZip:1.2.20'
         //path = "/usr/local/bin/7za"
     }
 

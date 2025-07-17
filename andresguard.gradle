@@ -43,4 +43,5 @@ def whiteList = [
         "R.id.webView"
 ]
 andresguard.whiteList = whiteList
+andresguard.use7zip = false
 ext.andresguard = andresguard
